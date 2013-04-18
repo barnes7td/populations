@@ -1,5 +1,5 @@
 class Analytics
-  def initialize(areas)
+  def initialize(areas = Setup.new().areas)
     @areas = areas
   end
 
