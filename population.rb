@@ -5,20 +5,23 @@ require_relative 'lib/analytics'
 class Population
   attr_accessor :analytics
 
-  def initialize
-    areas = Setup.new().areas
-    @analytics = Analytics.new(areas)
+  def initialize(analytics = Analytics.new())
+    @analytics = analytics
+    @choices = [nil,
+                "Areas count",
+                "Smallest Population (non 0)",
+                "Largest Population",
+                "How many zips in California",
+                "Information for a given zip",
+                "Exit"]
   end
 
   def menu
     system 'clear'
-    puts "Pupulation Menu"
-    puts "1. Areas count"
-    puts "2. Smallest Population (non 0)"
-    puts "3. Largest Population"
-    puts "4. How many zips in California"
-    puts "5. Information for a given zip"
-    puts "6. Exit"
+    puts "Population Menu"
+    @choices.each_with_index do |choice, i|
+      puts "#{i}. #{choice}" unless i == 0
+    end
   end
 
   def run
