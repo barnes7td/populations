@@ -25,17 +25,17 @@ class Population
   end
 
   def run
-    stop = false
+    exit = false
 
-    while !stop do
+    while !exit do
       # run the menu
       self.menu
       # grab the choice
       print "Choice: "
       choice = gets.strip.to_i
       # run their choice
-      stop = run_analytics(choice)
-      if stop
+      exit = run_analytics(choice)
+      if exit
         puts "Exiting"
       else
         print "\nHit enter to continue "
