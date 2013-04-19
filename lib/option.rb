@@ -1,11 +1,11 @@
 class Option
 
-  attr_reader :index, :description, :report
+  attr_reader :index, :description, :method
 
-  def initialize(index, description, report)
+  def initialize(index, description, method)
     @index = index
     @description = description
-    @report = report
+    @method = method
   end
 
 end

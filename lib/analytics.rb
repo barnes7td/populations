@@ -25,11 +25,11 @@ class Analytics
     option = @options.select { |opt| opt.index == choice  }.first
     if option == nil
       return"Invalid choice"
-    elsif option.report == :exit
+    elsif option.method == :exit
       return :exit
     end
     setup
-    self.send option.report
+    self.send option.method
   end
 
   def setup
@@ -40,7 +40,7 @@ class Analytics
     areas = []
     count = 0
 
-    print "reading file ."
+    print "\nreading file ."
     csv.read do |item|
       areas << Area.new(item)
       count += 1

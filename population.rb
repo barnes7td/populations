@@ -14,9 +14,12 @@ class Population
   def menu
     system 'clear'
     puts "Population Menu"
+    puts "-------------------"
     @options.each do |opt|
       puts "#{opt.index}. #{opt.description}"
     end
+    puts
+    print "Choice: "
   end
 
   def run
@@ -24,7 +27,6 @@ class Population
       # run the menu
       menu
       # grab the choice
-      print "Choice: "
       choice = gets.strip.to_i
       # run their choice
       analysis = @analytics.run(choice)
