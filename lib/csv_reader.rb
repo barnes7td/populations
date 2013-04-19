@@ -2,14 +2,17 @@
 # area as a hash
 
 class CSVReader
-  
+
   def initialize(filename)
     @fname = filename
   end
 
+  # def get_areas
+
+
   def read
     f = File.new(@fname, 'r')
-    
+
     # Grab the headers
     self.headers = f.readline
 

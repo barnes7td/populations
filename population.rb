@@ -1,67 +1,46 @@
-require_relative 'lib/setup'
 require_relative 'lib/analytics'
-
+# require_relative 'lib/csv_reader'
+# require_relative 'lib/area'
 
 class Population
-  attr_accessor :analytics
+  # attr_accessor :analytics
 
-  def initialize(analytics = Analytics.new())
-    @analytics = analytics
-    @choices = [nil,
-                "Areas count",
-                "Smallest Population (non 0)",
-                "Largest Population",
-                "How many zips in California",
-                "Information for a given zip",
-                "Exit"]
+  def initialize
+    # setup
+    @analytics = Analytics.new(@areas)
+    @options   = @analytics.options
   end
 
   def menu
     system 'clear'
     puts "Population Menu"
-    @choices.each_with_index do |choice, i|
-      puts "#{i}. #{choice}" unless i == 0
+    @options.each do |opt|
+      puts "#{opt.index}. #{opt.description}"
     end
   end
 
   def run
-    exit = false
-
-    while !exit do
+    while true do
       # run the menu
-      self.menu
+      menu
       # grab the choice
       print "Choice: "
       choice = gets.strip.to_i
       # run their choice
-      exit = run_analytics(choice)
-      if exit
+      analysis = @analytics.run(choice)
+      if analysis == :exit
+        puts
         puts "Exiting"
+        break
       else
+        puts
+        puts analysis
         print "\nHit enter to continue "
         gets
       end
     end
   end
 
-  def run_analytics(choice)
-    if choice == 1
-      @analytics.how_many
-    elsif choice == 2
-      @analytics.smallest_pop
-    elsif choice == 3
-      @analytics.largest_pop
-    elsif choice == 4
-      @analytics.california_zips
-    elsif choice == 5
-      print "Which zip? "
-      zip = gets.strip.to_i
-      @analytics.zip_info(zip)
-    else
-      return true
-    end
-    false
-  end
 end
 
 p = Population.new
